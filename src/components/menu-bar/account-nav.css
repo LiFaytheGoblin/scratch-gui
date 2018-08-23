@@ -190,18 +190,6 @@
     opacity: 0.5;
 }
 
-.save-in-progress {
-  animation: hue-rotate 3s linear infinite;
-}
-
-@keyframes hue-rotate {
-  from {
-    filter: hue-rotate();
-  }
-  to {
-    filter: hue-rotate(360deg);
-  }
-}
 
 
 /* NOTE: temporarily including styles for account nav */
@@ -226,6 +214,21 @@
 
 .mystuff > a {
   background-image: url("/images/mystuff.png");
+}
+
+.login-dropdown {
+  width: 200px;
+}
+.login-dropdown .button {
+  padding: .75em;
+}
+
+.dropdown .row {
+  margin-bottom: 1.25rem;
+}
+.dropdown .row input {
+  margin: 0;
+  height: 2.25rem;
 }
 .account-nav {
   padding-right: .5rem;
