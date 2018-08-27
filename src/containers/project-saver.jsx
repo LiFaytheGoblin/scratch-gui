@@ -29,11 +29,7 @@ class ProjectSaver extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.vm.saveProjectSb3().then(content => {
-            // TODO user-friendly project name
-            // File name: project-DATE-TIME
-            const date = new Date();
-            const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-            const filename = `untitled-project-${timestamp}.sb3`;
+            const filename = `${this.props.projectTitle}.sb3`;
 
             // Use special ms version if available to get it working on Edge.
             if (navigator.msSaveOrOpenBlob) {
@@ -63,12 +59,14 @@ class ProjectSaver extends React.Component {
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+    projectTitle: PropTypes.string,
     vm: PropTypes.shape({
         saveProjectSb3: PropTypes.func
     })
 };
 
 const mapStateToProps = state => ({
+    projectTitle: state.scratchGui.projectTitle.projectTitle,
     vm: state.scratchGui.vm
 });
 

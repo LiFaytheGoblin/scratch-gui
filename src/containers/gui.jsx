@@ -7,6 +7,7 @@ import ReactModal from 'react-modal';
 
 import ErrorBoundaryHOC from '../lib/error-boundary-hoc.jsx';
 import {openExtensionLibrary} from '../reducers/modals';
+import {setProjectTitle} from '../reducers/project-title';
 import {
     activateTab,
     BLOCKS_TAB_INDEX,
@@ -50,6 +51,9 @@ class GUI extends React.Component {
                 this.setState({loadingError: true, errorMessage: e});
             });
         this.props.vm.initialized = true;
+        if (this.props.projectTitle) {
+            this.props.onSetProjectTitle(this.props.projectTitle);
+        }
     }
     componentWillReceiveProps (nextProps) {
         if (this.props.projectData !== nextProps.projectData) {
@@ -65,6 +69,9 @@ class GUI extends React.Component {
                     });
             });
         }
+        if (this.props.projectTitle !== nextProps.projectTitle) {
+            this.props.onSetProjectTitle(nextProps.projectTitle);
+        }
     }
     render () {
         if (this.state.loadingError) {
@@ -76,8 +83,10 @@ class GUI extends React.Component {
             children,
             fetchingProject,
             loadingStateVisible,
+            onSetProjectTitle, // eslint-disable-line no-unused-vars
             projectData, // eslint-disable-line no-unused-vars
             projectHost, // eslint-disable-line no-unused-vars
+            projectTitle, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
         } = this.props;
@@ -100,10 +109,17 @@ GUI.propTypes = {
     importInfoVisible: PropTypes.bool,
     loadingStateVisible: PropTypes.bool,
     onSeeCommunity: PropTypes.func,
+    onSetProjectTitle: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
     projectHost: PropTypes.string,
+    projectTitle: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
+};
+
+GUI.defaultProps = {
+    projectTitle: 'Untitled-1'
 };
 
 const mapStateToProps = state => ({
@@ -132,7 +148,8 @@ const mapDispatchToProps = dispatch => ({
     onActivateCostumesTab: () => dispatch(activateTab(COSTUMES_TAB_INDEX)),
     onActivateSoundsTab: () => dispatch(activateTab(SOUNDS_TAB_INDEX)),
     onRequestCloseBackdropLibrary: () => dispatch(closeBackdropLibrary()),
-    onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary())
+    onRequestCloseCostumeLibrary: () => dispatch(closeCostumeLibrary()),
+    onSetProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
 const ConnectedGUI = connect(
