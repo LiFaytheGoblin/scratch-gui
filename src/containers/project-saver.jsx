@@ -84,26 +84,16 @@ class ProjectSaver extends React.Component {
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
-<<<<<<< HEAD
     projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    projectTitle: PropTypes.string,
     saveProjectSb3: PropTypes.func
 };
 
 const mapStateToProps = state => ({
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
-    projectId: state.scratchGui.projectId
-=======
-    projectTitle: PropTypes.string,
-    vm: PropTypes.shape({
-        saveProjectSb3: PropTypes.func
-    })
+    projectId: state.scratchGui.projectId,
+    projectTitle: state.scratchGui.projectTitle.projectTitle
 };
-
-const mapStateToProps = state => ({
-    projectTitle: state.scratchGui.projectTitle.projectTitle,
-    vm: state.scratchGui.vm
->>>>>>> make project title editable, both in standalone and www modes; use in save
-});
 
 export default connect(
     mapStateToProps,

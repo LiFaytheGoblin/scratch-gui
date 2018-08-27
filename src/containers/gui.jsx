@@ -114,6 +114,10 @@ GUI.propTypes = {
     vm: PropTypes.instanceOf(VM)
 };
 
+GUI.defaultProps = {
+    projectTitle: 'Untitled-1'
+};
+
 const mapStateToProps = state => ({
     activeTabIndex: state.scratchGui.editorTab.activeTabIndex,
     backdropLibraryVisible: state.scratchGui.modals.backdropLibrary,
