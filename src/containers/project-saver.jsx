@@ -33,11 +33,7 @@ class ProjectSaver extends React.Component {
         document.body.appendChild(saveLink);
 
         this.props.saveProjectSb3().then(content => {
-            // TODO user-friendly project name
-            // File name: project-DATE-TIME
-            const date = new Date();
-            const timestamp = `${date.toLocaleDateString()}-${date.toLocaleTimeString()}`;
-            const filename = `untitled-project-${timestamp}.sb3`;
+            const filename = `${this.props.projectTitle}.sb3`;
 
             // Use special ms version if available to get it working on Edge.
             if (navigator.msSaveOrOpenBlob) {
@@ -88,6 +84,7 @@ class ProjectSaver extends React.Component {
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+<<<<<<< HEAD
     projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     saveProjectSb3: PropTypes.func
 };
@@ -95,6 +92,17 @@ ProjectSaver.propTypes = {
 const mapStateToProps = state => ({
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
     projectId: state.scratchGui.projectId
+=======
+    projectTitle: PropTypes.string,
+    vm: PropTypes.shape({
+        saveProjectSb3: PropTypes.func
+    })
+};
+
+const mapStateToProps = state => ({
+    projectTitle: state.scratchGui.projectTitle.projectTitle,
+    vm: state.scratchGui.vm
+>>>>>>> make project title editable, both in standalone and www modes; use in save
 });
 
 export default connect(

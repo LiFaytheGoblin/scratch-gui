@@ -19,6 +19,7 @@ import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
+import {setProjectTitle} from '../../reducers/project-title';
 import {
     openFileMenu,
     closeFileMenu,
@@ -393,11 +394,17 @@ class MenuBar extends React.Component {
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div className={classNames(styles.menuBarItem)}>
-                        <MenuBarItemTooltip id="title-field">
+                        <MenuBarItemTooltip
+                            enable
+                            id="title-field"
+                        >
                             <input
-                                disabled
                                 className={classNames(styles.titleField)}
-                                placeholder="Untitled-1"
+                                placeholder=""
+                                value={this.props.projectTitle}
+                                onBlur={this.handleUpdateProjectTitle}
+                                onChange={this.handleProjectTitleChange}
+                                onKeyPress={this.handleProjectTitleKeyPress}
                             />
                         </MenuBarItemTooltip>
                     </div>
@@ -521,7 +528,10 @@ MenuBar.propTypes = {
     onRequestCloseEdit: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
-    onSeeCommunity: PropTypes.func
+    onSeeCommunity: PropTypes.func,
+    onSetProjectTitle: PropTypes.func,
+    onUpdateProjectTitle: PropTypes.func,
+    projectTitle: PropTypes.string
 };
 
 const mapStateToProps = state => ({
@@ -529,7 +539,8 @@ const mapStateToProps = state => ({
     fileMenuOpen: fileMenuOpen(state),
     editMenuOpen: editMenuOpen(state),
     isRtl: state.locales.isRtl,
-    languageMenuOpen: languageMenuOpen(state)
+    languageMenuOpen: languageMenuOpen(state),
+    projectTitle: state.scratchGui.projectTitle.projectTitle
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -540,7 +551,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
     onClickLanguage: () => dispatch(openLanguageMenu()),
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
-    onSeeCommunity: () => dispatch(setPlayer(true))
+    onSeeCommunity: () => dispatch(setPlayer(true)),
+    onSetProjectTitle: title => dispatch(setProjectTitle(title))
 });
 
 export default injectIntl(connect(
