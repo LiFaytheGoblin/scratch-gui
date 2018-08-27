@@ -359,7 +359,7 @@ class MenuBar extends React.Component {
                             <input
                                 disabled
                                 className={classNames(styles.titleField)}
-                                placeholder="Untitled-1"
+                                placeholder="Unbenannt-1"
                             />
                         </MenuBarItemTooltip>
                     </div>
