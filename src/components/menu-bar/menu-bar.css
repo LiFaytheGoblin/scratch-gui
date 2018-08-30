@@ -116,11 +116,11 @@ $title-width: 12rem;
     border-radius: $form-radius;
     -webkit-border-radius: $form-radius;
     -moz-border-radius: $form-radius;
-    width: $title-width;
-    height: auto;
     background-color: $ui-white-transparent;
     background-clip: padding-box;
     -webkit-background-clip: padding-box;
+    width: $title-width;
+    height: auto;
     padding: .5rem;
 }
 
@@ -140,10 +140,10 @@ $title-width: 12rem;
 }
 
 .title-field:focus {
-    background-color: $ui-white;
-    color: $text-primary;
     border: $form-radius $ui-white-transparent solid;
     border-radius: calc($form-radius * 2); /* double the border width */
+    background-color: $ui-white;
+    color: $text-primary;
     width: calc($title-width - 0.36rem);
 }
 
