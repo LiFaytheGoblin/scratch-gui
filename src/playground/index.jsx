@@ -28,6 +28,13 @@ document.body.appendChild(appTarget);
 GUI.setAppElement(appTarget);
 const WrappedGui = HashParserHOC(AppStateHOC(GUI));
 
+// simple example of how you might manage project title externally.
+// Changing project title within GUI interface will update it here.
+let projectTitle = 'Untitled-1';
+const onUpdateProjectTitle = title => {
+    projectTitle = title;
+};
+
 // TODO a hack for testing the backpack, allow backpack host to be set by url param
 const backpackHostMatches = window.location.href.match(/[?&]backpack_host=([^&]*)&?/);
 const backpackHost = backpackHostMatches ? backpackHostMatches[1] : null;
@@ -37,4 +44,11 @@ const backpackOptions = {
     host: backpackHost
 };
 
-ReactDOM.render(<WrappedGui backpackOptions={backpackOptions} />, appTarget);
+ReactDOM.render(
+    <WrappedGui
+        backpackOptions={backpackOptions}
+        projectTitle={projectTitle}
+        onUpdateProjectTitle={onUpdateProjectTitle}
+    />,
+    appTarget
+);

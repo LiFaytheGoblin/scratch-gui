@@ -92,8 +92,8 @@ ProjectSaver.propTypes = {
 const mapStateToProps = state => ({
     saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
     projectId: state.scratchGui.projectId,
-    projectTitle: state.scratchGui.projectTitle.projectTitle
-};
+    projectTitle: state.scratchGui.projectTitle
+});
 
 export default connect(
     mapStateToProps,

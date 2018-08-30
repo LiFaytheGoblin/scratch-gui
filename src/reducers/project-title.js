@@ -1,16 +1,12 @@
 const SET_PROJECT_TITLE = 'projectTitle/SET_PROJECT_TITLE';
 
-const projectTitleInitialState = {
-    projectTitle: 'Untitled-1'
-};
+const initialState = 'Untitled-1';
 
 const reducer = function (state, action) {
-    if (typeof state === 'undefined') state = projectTitleInitialState;
+    if (typeof state === 'undefined') state = initialState;
     switch (action.type) {
     case SET_PROJECT_TITLE:
-        return Object.assign({}, state, {
-            projectTitle: action.title
-        });
+        return action.title;
     default:
         return state;
     }
@@ -22,6 +18,6 @@ const setProjectTitle = title => ({
 
 export {
     reducer as default,
-    projectTitleInitialState,
+    initialState as projectTitleInitialState,
     setProjectTitle
 };

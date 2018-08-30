@@ -13,13 +13,13 @@ import LanguageSelector from '../../containers/language-selector.jsx';
 import ProjectLoader from '../../containers/project-loader.jsx';
 import Menu from '../../containers/menu.jsx';
 import {MenuItem, MenuSection} from '../menu/menu.jsx';
+import ProjectTitleInput from './project-title-input.jsx';
 import ProjectSaver from '../../containers/project-saver.jsx';
 import DeletionRestorer from '../../containers/deletion-restorer.jsx';
 import TurboMode from '../../containers/turbo-mode.jsx';
 
 import {openTipsLibrary} from '../../reducers/modals';
 import {setPlayer} from '../../reducers/mode';
-import {setProjectTitle} from '../../reducers/project-title';
 import {
     openFileMenu,
     closeFileMenu,
@@ -398,13 +398,8 @@ class MenuBar extends React.Component {
                             enable
                             id="title-field"
                         >
-                            <input
-                                className={classNames(styles.titleField)}
-                                placeholder=""
-                                value={this.props.projectTitle}
-                                onBlur={this.handleUpdateProjectTitle}
-                                onChange={this.handleProjectTitleChange}
-                                onKeyPress={this.handleProjectTitleKeyPress}
+                            <ProjectTitleInput
+                                onUpdateProjectTitle={this.props.onUpdateProjectTitle}
                             />
                         </MenuBarItemTooltip>
                     </div>
@@ -529,9 +524,7 @@ MenuBar.propTypes = {
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onSeeCommunity: PropTypes.func,
-    onSetProjectTitle: PropTypes.func,
-    onUpdateProjectTitle: PropTypes.func,
-    projectTitle: PropTypes.string
+    onUpdateProjectTitle: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -539,8 +532,7 @@ const mapStateToProps = state => ({
     fileMenuOpen: fileMenuOpen(state),
     editMenuOpen: editMenuOpen(state),
     isRtl: state.locales.isRtl,
-    languageMenuOpen: languageMenuOpen(state),
-    projectTitle: state.scratchGui.projectTitle.projectTitle
+    languageMenuOpen: languageMenuOpen(state)
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -551,8 +543,7 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
     onClickLanguage: () => dispatch(openLanguageMenu()),
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
-    onSeeCommunity: () => dispatch(setPlayer(true)),
-    onSetProjectTitle: title => dispatch(setProjectTitle(title))
+    onSeeCommunity: () => dispatch(setPlayer(true))
 });
 
 export default injectIntl(connect(
