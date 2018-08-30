@@ -2,6 +2,8 @@
 @import "../../css/units.css";
 @import "../../css/z-index.css";
 
+$title-width: 12rem;
+
 .menu-bar {
     display: flex;
     flex-direction: row;
@@ -111,10 +113,14 @@
 
 .title-field {
     border: 1px dashed $ui-black-transparent;
-    border-radius: .25rem;
-    width: 12rem;
-    height: 34px;
-    background-color: transparent;
+    border-radius: $form-radius;
+    -webkit-border-radius: $form-radius;
+    -moz-border-radius: $form-radius;
+    width: $title-width;
+    height: auto;
+    background-color: $ui-white-transparent;
+    background-clip: padding-box;
+    -webkit-background-clip: padding-box;
     padding: .5rem;
 }
 
@@ -123,6 +129,22 @@
     color: $ui-white;
     font-weight: bold;
     font-size: .8rem;
+}
+
+.title-field:hover {
+    background-color: hsla(0, 100%, 100%, 0.5);
+}
+
+.title-field:focus {
+    outline:none;
+}
+
+.title-field:focus {
+    background-color: $ui-white;
+    color: $text-primary;
+    border: $form-radius $ui-white-transparent solid;
+    border-radius: calc($form-radius * 2); /* double the border width */
+    width: calc($title-width - 0.36rem);
 }
 
 .share-button {
