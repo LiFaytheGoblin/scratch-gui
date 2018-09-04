@@ -111,42 +111,6 @@ $title-width: 12rem;
     height: 34px;
 }
 
-.title-field {
-    border: 1px dashed $ui-black-transparent;
-    border-radius: $form-radius;
-    -webkit-border-radius: $form-radius;
-    -moz-border-radius: $form-radius;
-    background-color: $ui-white-transparent;
-    background-clip: padding-box;
-    -webkit-background-clip: padding-box;
-    width: $title-width;
-    height: auto;
-    padding: .5rem;
-}
-
-.title-field,
-.title-field::placeholder {
-    color: $ui-white;
-    font-weight: bold;
-    font-size: .8rem;
-}
-
-.title-field:hover {
-    background-color: hsla(0, 100%, 100%, 0.5);
-}
-
-.title-field:focus {
-    outline:none;
-}
-
-.title-field:focus {
-    border: $form-radius $ui-white-transparent solid;
-    border-radius: calc($form-radius * 2); /* double the border width */
-    background-color: $ui-white;
-    color: $text-primary;
-    width: calc($title-width - 0.36rem);
-}
-
 .share-button {
     background: $data-primary;
     height: 32px;
@@ -210,4 +174,17 @@ $title-width: 12rem;
 
 .disabled {
     opacity: 0.5;
+}
+
+.save-in-progress {
+  animation: hue-rotate 3s linear infinite;
+}
+
+@keyframes hue-rotate {
+  from {
+    filter: hue-rotate();
+  }
+  to {
+    filter: hue-rotate(360deg);
+  }
 }

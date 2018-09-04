@@ -79,13 +79,15 @@ class GUI extends React.Component {
                 `Failed to load project from server [id=${window.location.hash}]: ${this.state.errorMessage}`);
         }
         const {
-            assetHost, // eslint-disable-line no-unused-vars
             children,
             fetchingProject,
             loadingStateVisible,
             onSetProjectTitle, // eslint-disable-line no-unused-vars
             projectData, // eslint-disable-line no-unused-vars
+<<<<<<< HEAD
             projectHost, // eslint-disable-line no-unused-vars
+=======
+>>>>>>> 764063d5a086a7c0faa1b9fc46a0df67f56443b2
             projectTitle, // eslint-disable-line no-unused-vars
             vm,
             ...componentProps
@@ -103,7 +105,6 @@ class GUI extends React.Component {
 }
 
 GUI.propTypes = {
-    assetHost: PropTypes.string,
     children: PropTypes.node,
     fetchingProject: PropTypes.bool,
     importInfoVisible: PropTypes.bool,
@@ -113,7 +114,6 @@ GUI.propTypes = {
     onUpdateProjectTitle: PropTypes.func,
     previewInfoVisible: PropTypes.bool,
     projectData: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
-    projectHost: PropTypes.string,
     projectTitle: PropTypes.string,
     vm: PropTypes.instanceOf(VM)
 };

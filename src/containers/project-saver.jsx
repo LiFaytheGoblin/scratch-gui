@@ -2,6 +2,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {connect} from 'react-redux';
+import storage from '../lib/storage';
 
 /**
  * Project saver component passes a saveProject function to its child.
@@ -21,14 +22,17 @@ class ProjectSaver extends React.Component {
     constructor (props) {
         super(props);
         bindAll(this, [
-            'saveProject'
+            'createProject',
+            'updateProject',
+            'saveProject',
+            'doStoreProject'
         ]);
     }
     saveProject () {
         const saveLink = document.createElement('a');
         document.body.appendChild(saveLink);
 
-        this.props.vm.saveProjectSb3().then(content => {
+        this.props.saveProjectSb3().then(content => {
             const filename = `${this.props.projectTitle}.sb3`;
 
             // Use special ms version if available to get it working on Edge.
@@ -45,29 +49,50 @@ class ProjectSaver extends React.Component {
             document.body.removeChild(saveLink);
         });
     }
+    doStoreProject (id) {
+        return this.props.saveProjectSb3()
+            .then(content => {
+                const assetType = storage.AssetType.Project;
+                const dataFormat = storage.DataFormat.SB3;
+                const body = new FormData();
+                body.append('sb3_file', content, 'sb3_file');
+                return storage.store(
+                    assetType,
+                    dataFormat,
+                    body,
+                    id
+                );
+            });
+    }
+    createProject () {
+        return this.doStoreProject();
+    }
+    updateProject () {
+        return this.doStoreProject(this.props.projectId);
+    }
     render () {
         const {
-            /* eslint-disable no-unused-vars */
-            children,
-            vm,
-            /* eslint-enable no-unused-vars */
-            ...props
+            children
         } = this.props;
-        return this.props.children(this.saveProject, props);
+        return children(
+            this.saveProject,
+            this.updateProject,
+            this.createProject
+        );
     }
 }
 
 ProjectSaver.propTypes = {
     children: PropTypes.func,
+    projectId: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     projectTitle: PropTypes.string,
-    vm: PropTypes.shape({
-        saveProjectSb3: PropTypes.func
-    })
+    saveProjectSb3: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-    projectTitle: state.scratchGui.projectTitle.projectTitle,
-    vm: state.scratchGui.vm
+    saveProjectSb3: state.scratchGui.vm.saveProjectSb3.bind(state.scratchGui.vm),
+    projectId: state.scratchGui.projectId,
+    projectTitle: state.scratchGui.projectTitle
 });
 
 export default connect(

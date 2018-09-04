@@ -11,6 +11,7 @@ import modalReducer, {modalsInitialState} from './modals';
 import modeReducer, {modeInitialState} from './mode';
 import monitorReducer, {monitorsInitialState} from './monitors';
 import monitorLayoutReducer, {monitorLayoutInitialState} from './monitor-layout';
+import projectIdReducer, {projectIdInitialState} from './project-id';
 import projectTitleReducer, {projectTitleInitialState} from './project-title';
 import restoreDeletionReducer, {restoreDeletionInitialState} from './restore-deletion';
 import stageSizeReducer, {stageSizeInitialState} from './stage-size';
@@ -36,6 +37,10 @@ const guiInitialState = {
     modals: modalsInitialState,
     monitors: monitorsInitialState,
     monitorLayout: monitorLayoutInitialState,
+<<<<<<< HEAD
+=======
+    projectId: projectIdInitialState,
+>>>>>>> 764063d5a086a7c0faa1b9fc46a0df67f56443b2
     projectTitle: projectTitleInitialState,
     restoreDeletion: restoreDeletionInitialState,
     targets: targetsInitialState,
@@ -79,6 +84,10 @@ const guiReducer = combineReducers({
     modals: modalReducer,
     monitors: monitorReducer,
     monitorLayout: monitorLayoutReducer,
+<<<<<<< HEAD
+=======
+    projectId: projectIdReducer,
+>>>>>>> 764063d5a086a7c0faa1b9fc46a0df67f56443b2
     projectTitle: projectTitleReducer,
     restoreDeletion: restoreDeletionReducer,
     targets: targetReducer,
